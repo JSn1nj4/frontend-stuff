@@ -9,9 +9,9 @@
     </TextHeading>
     <p class="mt-3 text-gray-600 dark:text-gray-300">
       Have a look around! If something is broken or you have a suggestion, feel free to open an
-      <TextLink href="https://github.com/JSn1nj4/nuxtstuff/issues" target="_blank">issue</TextLink>
+      <TextLink href="https://github.com/JSn1nj4/frontend-stuff/issues" target="_blank">issue</TextLink>
       or submit a
-      <TextLink href="https://github.com/JSn1nj4/nuxtstuff/pulls" target="_blank">pull request</TextLink>.
+      <TextLink href="https://github.com/JSn1nj4/frontend-stuff/pulls" target="_blank">pull request</TextLink>.
     </p>
     <div class="block sm:grid sm:grid-cols-3 gap-10 dark:text-white mt-4 pt-4 border-t-2 border-t-emerald-500 border-dashed">
       <div class="mt-0.5 mb-4 sm:mb-0 col-span-3">

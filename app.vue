@@ -8,7 +8,7 @@
 import {useHead} from "#head";
 
 useHead({
-  titleTemplate: '%s - NuxtStuff',
+  titleTemplate: '%s - Frontend Stuff',
   link: [
     { rel: "apple-touch-icon", sizes: "180x180", href: "/apple-touch-icon.png?v=1" },
     { rel: "icon", type: "image/png", sizes: "16x16", href: "/favicon-16x16.png?v=1" },
