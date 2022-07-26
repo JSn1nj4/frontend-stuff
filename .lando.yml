@@ -1,7 +1,7 @@
-name: nuxtstuff
+name: frontend-stuff
 proxy:
   appserver:
-    - nuxtstuff.lndo.site
+    - frontend-stuff.lndo.site
 services:
   appserver:
     type: node:16
