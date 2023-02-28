@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.0.2
+
+- Rename project
+
 ## 1.0.1
 
 - Ignore .netlify folder

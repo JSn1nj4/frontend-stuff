@@ -17,6 +17,6 @@ const props = withDefaults(defineProps<{
   title?: string,
 }>(), {
   href: '/',
-  title: 'NuxtStuff',
+  title: 'Frontend Stuff',
 })
 </script>

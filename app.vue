@@ -8,6 +8,6 @@
 import {useHead} from "#head";
 
 useHead({
-  titleTemplate: '%s - NuxtStuff',
+  titleTemplate: '%s - Frontend Stuff',
 })
 </script>
