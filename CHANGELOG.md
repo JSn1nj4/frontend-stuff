@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## 1.1.0
+
+- Node version updated to 22.10.0
+- Replaced yarn with pnpm@9.12.2
+- Upgrade all project dependencies
+- Add package name
+
 ## 1.0.2
 
 - Project renamed
