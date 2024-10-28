@@ -7,16 +7,13 @@
     <TextHeading type="h2" class="text-slate-900 dark:text-slate-50 mb-3 font-normal">
       Tools for working with date/time strings and timestamps
     </TextHeading>
-     <div class="block sm:grid sm:grid-cols-3 gap-10 text-slate-800 dark:text-white mt-4 pt-4 border-t-2 border-t-emerald-500 border-dashed">
-       <div class="col-span-3">
+     <div class="block sm:grid sm:grid-cols-2 gap-10 text-slate-800 dark:text-white mt-4 pt-4 border-t-2 border-t-emerald-500 border-dashed">
+       <div class="col-span-2">
          <TextHeading type="h3" class="text-slate-900 dark:text-slate-50">
            Format Conversion
          </TextHeading>
        </div>
-       <div class="mt-0.5 mb-4 sm:mb-0">
-         <form-radio-group :list="dateFormatRadioList" name="transform" text-size="text-lg" @change="dateFormatter.setFilter($event)" />
-       </div>
-       <div class="col-span-2">
+       <div>
          <form-input-group
            id='date-formatter-input'
            name='date-formatter-input'
@@ -24,6 +21,8 @@
          >
            Input
          </form-input-group>
+       </div>
+       <div>
          <form-input-group
            disabled
            id="date-formatter-output"
@@ -80,9 +79,14 @@ const dateFormatter: IFieldIO<string> = new FieldIO({
   },
 })
 
-const dateFormatRadioList = [
-  { label: 'Input', id: 'default', value: 'default', checked: true },
-  { label: 'ISO 8601', id: 'iso8601', value: 'iso8601' },
-  { label: 'Unix Timestamp', id: 'unix', value: 'unix' },
+const dateInput = [
+  { label: 'Raw', value: 'default', selected: true },
+  { label: 'Date Picker', value: 'datepicker' },
+]
+
+const dateOutputFormats = [
+  { label: 'Input', value: 'default', selected: true },
+  { label: 'ISO 8601', value: 'iso8601', },
+  { label: 'Unix Timestamp', value: 'unix', },
 ]
 </script>
