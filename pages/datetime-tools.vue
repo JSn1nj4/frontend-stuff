@@ -14,23 +14,23 @@
          </TextHeading>
        </div>
        <div>
-         <form-input-group
+         <FormInputGroup
            id='date-formatter-input'
            name='date-formatter-input'
            v-model="dateFormatter.input.value"
          >
            Input
-         </form-input-group>
+         </FormInputGroup>
        </div>
        <div>
-         <form-input-group
+         <FormInputGroup
            disabled
            id="date-formatter-output"
            name='date-formatter-output'
            v-model="dateFormatter.output.value"
          >
           Output
-         </form-input-group>
+         </FormInputGroup>
        </div>
     </div>
   </div>

@@ -19,8 +19,8 @@
 </template>
 
 <script setup lang="ts">
-import {BorderBottom} from "~/library/types/spacing";
-import {TextSize} from "~/library/types/typography";
+import {type BorderBottom} from "~/library/types/spacing";
+import {type TextSize} from "~/library/types/typography";
 
 interface RadioList {
   checked?: boolean
