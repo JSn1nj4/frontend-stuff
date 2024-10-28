@@ -33,12 +33,11 @@ export class Pipe<T> implements IPipe<T>{
  * Based on: https://gist.github.com/JSn1nj4/d31e03c1b446ec61a8651436b5dc0a11
  */
 export class Pipeline<T> {
-  handler: string
+  handler: string = 'handle'
   steps: IterableIterator<IPipe<T>>
 
   constructor(...steps: IPipe<T>[]) {
     this.steps = steps[Symbol.iterator]();
-    this.setHandler();
   }
 
   setHandler(handler: string = 'handle'): void {
