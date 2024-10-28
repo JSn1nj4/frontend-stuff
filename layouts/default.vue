@@ -34,7 +34,7 @@ interface NavLink {
 
 const links: NavLink[] = [
   // { name: 'About', href: '/about', },
-  { name: 'Developer', href: 'https://elliotderhay.com', target: "_blank", },
+  { name: 'Developer', href: 'https://elliotderhay.com', target: "elliotderhay-com", },
 ]
 
 const pageTitle: ComputedRef<string | null> = computed(() => {
