@@ -49,9 +49,11 @@ export class Pipeline<T> {
     try {
       return done ? data : step[this.handler](data, this.next.bind(this));
     } catch(e) {
-      console.log('Unable to run next step in pipeline.')
-      console.table(e.message)
-      console.table({ step })
+      if (e instanceof Error) { // stupid, stupid, stupid
+        console.log('Unable to run next step in pipeline.')
+        console.table(e.message)
+        console.table({step})
+      }
     }
   }
 }
