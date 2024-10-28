@@ -39,8 +39,8 @@
 
 <script setup lang="ts">
 import { globals } from '~/library/stores/globals'
-import { FieldIO, IFieldIO } from '~/library/forms/FieldIO.class'
-import getUnixTime from 'date-fns/getUnixTime'
+import { FieldIO, type IFieldIO } from '~/library/forms/FieldIO.class'
+import {getUnixTime} from 'date-fns/getUnixTime'
 import {pipe} from '~/library/helpers/pipes'
 import {formatISO, fromUnixTime} from 'date-fns'
 
@@ -55,7 +55,6 @@ const dateFormatter: IFieldIO<string> = new FieldIO({
       return pipe(v,
         parseInt,
         fromUnixTime,
-        (value) => new Date(value),
         formatISO
       )
     }
