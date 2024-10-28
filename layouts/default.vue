@@ -11,7 +11,7 @@
       </div>
       <input type="checkbox" id="menu-toggle" name="menu-toggle" class="absolute hidden top-0 left-0 -z-50">
       <nav class="mobile-menu absolute sm:relative block sm:flex flex-row gap-8 justify-center md:justify-end top-full sm:mt-8 md:mt-0 bg-gray-100 dark:bg-gray-900 sm:bg-transparent w-full sm:w-auto h-auto text-slate-70 dark:text-slate-300 text-center sm:text-right transition-opacity duration-300">
-        <NuxtLink v-for="link in links" :href="link.href" :target="link.target" class="flex flex-col justify-end my-4 sm:my-0 h-full text-2xl hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors duration-300">{{ link.name }}</NuxtLink>
+        <NuxtLink v-for="(link, index) in links" :key="`link-${index}`" :href="link.href" :target="link.target" class="flex flex-col justify-end my-4 sm:my-0 h-full text-2xl hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors duration-300">{{ link.name }}</NuxtLink>
         <IconsGithubIcon href="https://github.com/JSn1nj4/nuxtstuff" title="GitHub Repository" class="my-4 sm:my-0 h-full flex sm:flex-col flex-row justify-center sm:justify-end hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors duration-300" />
       </nav>
     </div>
@@ -23,9 +23,8 @@
 </template>
 
 <script setup lang="ts">
-import {ComputedRef} from "@vue/reactivity";
-import {Target} from "~/library/types/html-attributes";
 import {globals} from "~/library/stores/globals";
+import type {Target} from "~/library/types/html-attributes";
 
 interface NavLink {
   name: string
@@ -35,7 +34,7 @@ interface NavLink {
 
 const links: NavLink[] = [
   // { name: 'About', href: '/about', },
-  { name: 'Developer', href: 'https://elliotderhay.com', target: "_blank", },
+  { name: 'Developer', href: 'https://elliotderhay.com', target: "elliotderhay-com", },
 ]
 
 const pageTitle: ComputedRef<string | null> = computed(() => {
