@@ -114,7 +114,7 @@ const dateInputTypes = [
 ] as const
 type dateInputTypeOptions = typeof dateInputTypes[number]['value']
 
-const dateInputType = ref<dateInputTypeOptions>('datepicker')
+const dateInputType = ref<dateInputTypeOptions>('default')
 
 const dateOutputFormats = [
   { label: 'Input', value: 'default', selected: true },
