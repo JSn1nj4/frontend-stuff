@@ -77,7 +77,6 @@ globals.pageTitle = title.value
 
 const dateFormatter: IFieldIO<string> = new FieldIO({
   iso8601(v: string): string {
-    // console.log(`value: ${formatISO(new Date(v))}`)
     let intstr: string = parseInt(v).toString()
     if(intstr.length === v.length) {
       return pipe(v,
