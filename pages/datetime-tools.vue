@@ -21,26 +21,14 @@
         </TextHeading>
       </div>
       <div>
-        <Label for="date-input-type">Date Selector Type</Label>
-        <Select
+        <FormSelect
+          id="date-type-input"
+          name="date-type-input"
+          label="Date Selector Type"
+          placeholder="Choose how to select a date/time"
+          :options="dateInputTypeOptions"
           v-model="dateInputType"
-          id="date-input-type"
-          name="date-input-type"
-        >
-          <SelectTrigger>
-            <SelectValue
-              placeholder="How do you want to select a date and time?"
-            />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem
-              v-for="(inputType, index) in dateInputTypes"
-              :key="`input-type-${index}`"
-              :value="inputType.value"
-              >{{ inputType.label }}
-            </SelectItem>
-          </SelectContent>
-        </Select>
+        />
         <FormInputGroup
           id="date-formatter-input"
           name="date-formatter-input"
@@ -69,13 +57,7 @@ import { FieldIO, type IFieldIO } from '~/library/forms/FieldIO.class'
 import { getUnixTime } from 'date-fns/getUnixTime'
 import { pipe } from '~/library/helpers/pipes'
 import { formatISO, fromUnixTime } from 'date-fns'
-import {
-  Select,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '~/components/ui/select'
-import { Label } from '~/components/ui/label'
+import type { SelectOptions } from '~/components/Form/Select.vue'
 
 const title = ref('Date/Time Tools')
 globals.pageTitle = title.value
@@ -107,14 +89,13 @@ const dateFormatter: IFieldIO<string> = new FieldIO({
   },
 })
 
-const dateInputTypes = [
+const dateInputTypeOptions = [
   { label: 'Raw', value: 'default' },
   { label: 'Date Picker', value: 'datepicker' },
   { label: 'Dropdowns', value: 'dropdowns' },
-] as const
-type dateInputTypeOptions = typeof dateInputTypes[number]['value']
+]
 
-const dateInputType = ref<dateInputTypeOptions>('default')
+const dateInputType = ref<SelectOptions>('default')
 
 const dateOutputFormats = [
   { label: 'Input', value: 'default', selected: true },
