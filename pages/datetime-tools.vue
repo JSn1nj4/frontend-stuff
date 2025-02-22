@@ -38,6 +38,14 @@
         </FormInputGroup>
       </div>
       <div>
+        <FormSelect
+          id="date-type-output"
+          name="date-type-output"
+          label="Output Format Selector"
+          placeholder="Choose how to format date/time output"
+          :options="dateOutputFormatOptions"
+          v-model="dateOutputFormat"
+        />
         <FormInputGroup
           disabled
           id="date-formatter-output"
@@ -94,12 +102,12 @@ const dateInputTypeOptions = [
   { label: 'Date Picker', value: 'datepicker' },
   { label: 'Dropdowns', value: 'dropdowns' },
 ]
-
 const dateInputType = ref<SelectOptions>('default')
 
-const dateOutputFormats = [
-  { label: 'Input', value: 'default', selected: true },
+const dateOutputFormatOptions = [
+  { label: 'Unformatted', value: 'default' },
   { label: 'ISO 8601', value: 'iso8601' },
   { label: 'Unix Timestamp', value: 'unix' },
 ]
+const dateOutputFormat = ref<SelectOptions>('default')
 </script>
