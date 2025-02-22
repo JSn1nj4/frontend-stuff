@@ -1,10 +1,15 @@
 <template>
-  <div class="mt-4 bg-white dark:bg-slate-700 overflow-hidden shadow sm:rounded-lg p-6">
+  <div
+    class="mt-4 bg-white dark:bg-slate-700 overflow-hidden shadow sm:rounded-lg p-6"
+  >
     <Head>
       <Title>{{ title }}</Title>
       <Meta name="description" content="A collection of mini Vue projects" />
     </Head>
-    <TextHeading type="h2" class="text-slate-900 dark:text-slate-50 mb-3 font-normal">
+    <TextHeading
+      type="h2"
+      class="text-slate-900 dark:text-slate-50 mb-3 font-normal"
+    >
       Tools for working with date/time strings and timestamps
     </TextHeading>
     <div
@@ -52,8 +57,8 @@
           v-model="dateFormatter.output.value"
         >
           Output
-         </FormInputGroup>
-       </div>
+        </FormInputGroup>
+      </div>
     </div>
   </div>
 </template>
@@ -78,18 +83,13 @@ globals.pageTitle = title.value
 const dateFormatter: IFieldIO<string> = new FieldIO({
   iso8601(v: string): string {
     let intstr: string = parseInt(v).toString()
-    if(intstr.length === v.length) {
-      return pipe(v,
-        parseInt,
-        fromUnixTime,
-        formatISO
-      )
+    if (intstr.length === v.length) {
+      return pipe(v, parseInt, fromUnixTime, formatISO)
     }
 
     return v
   },
   unix(v: string): string {
-
     // Assumed input is integer, which is already a valid Unix timestamp
     let int = parseInt(v)
     if (int.toString().length === v.length) {
@@ -98,7 +98,7 @@ const dateFormatter: IFieldIO<string> = new FieldIO({
 
     // Assumed date string, which can be converted to Unix timestamp
     let unix: number = getUnixTime(new Date(v))
-    if(!isNaN(unix)) {
+    if (!isNaN(unix)) {
       return unix.toString()
     }
 
@@ -118,7 +118,7 @@ const dateInputType = ref<dateInputTypeOptions>('datepicker')
 
 const dateOutputFormats = [
   { label: 'Input', value: 'default', selected: true },
-  { label: 'ISO 8601', value: 'iso8601', },
-  { label: 'Unix Timestamp', value: 'unix', },
+  { label: 'ISO 8601', value: 'iso8601' },
+  { label: 'Unix Timestamp', value: 'unix' },
 ]
 </script>
