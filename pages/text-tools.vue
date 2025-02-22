@@ -36,7 +36,8 @@
 
 <script lang="ts" setup>
 import {globals} from "~/library/stores/globals"
-import {FieldIO, IFieldIO} from "~/library/forms/FieldIO.class"
+import type {IFieldIO} from "~/library/forms/FieldIO.class"
+import {FieldIO} from "~/library/forms/FieldIO.class"
 import {capitalize, lowercase, titlecase, uppercase, urldecode, urlencode} from "~/library/helpers/formatters/string";
 
 const title = ref('Text Tools')
