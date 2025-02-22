@@ -1,4 +1,4 @@
-import { type FunctionCollection} from "~/library/types/basic-constructs";
+import { type FunctionCollection } from '~/library/types/basic-constructs'
 
 export interface IFieldIO<T> {
   input: Ref<T>
@@ -6,9 +6,10 @@ export interface IFieldIO<T> {
   filters: FunctionCollection
   filter: Ref<Function>
   setFilter: (e: Event) => void
+  setValue: (e: Event) => void
 }
 
-export class FieldIO implements IFieldIO<string>{
+export class FieldIO implements IFieldIO<string> {
   input: Ref<string>
   filters: FunctionCollection
   filter: Ref<Function>
@@ -28,11 +29,15 @@ export class FieldIO implements IFieldIO<string>{
   setFilter(e: Event) {
     const filter = (e.target as HTMLInputElement).value
 
-    if(!this.filters?.[filter]) {
+    if (!this.filters?.[filter]) {
       console.log(`Filter '${filter}' does not exist in filters list.`)
       return
     }
 
     this.filter.value = this.filters[filter]
+  }
+
+  setValue(e: Event): void {
+    this.input.value = (e.target as HTMLInputElement).value
   }
 }
