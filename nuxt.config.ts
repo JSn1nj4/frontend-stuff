@@ -18,6 +18,11 @@ export default defineNuxtConfig({
     classSuffix: '',
   },
 
+  shadcn: {
+    prefix: '',
+    componentDir: './components/ui',
+  },
+
   devServer: {
     host: serverHost(process.env?.VITE_SERVER_HOST),
     https: serverHttps(process.env),
