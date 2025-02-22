@@ -1,6 +1,8 @@
 <script setup lang="ts">
 export type SelectOptions = { label: string; value: string }[]
 
+const model = defineModel()
+
 const props = withDefaults(
   defineProps<{
     id?: string
@@ -30,7 +32,7 @@ import { Label } from '~/components/ui/label'
 <template>
   <div>
     <Label v-if="!!label" :for="id">{{ label }}</Label>
-    <Select v-model="dateInputType" :id="id" :name="name">
+    <Select v-model="model" :id="id" :name="name">
       <SelectTrigger>
         <SelectValue :placeholder="placeholder" />
       </SelectTrigger>

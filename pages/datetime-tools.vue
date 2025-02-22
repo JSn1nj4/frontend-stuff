@@ -97,17 +97,17 @@ const dateFormatter: IFieldIO<string> = new FieldIO({
   },
 })
 
-const dateInputTypeOptions = [
+const dateInputTypeOptions: SelectOptions = [
   { label: 'Raw', value: 'default' },
   { label: 'Date Picker', value: 'datepicker' },
   { label: 'Dropdowns', value: 'dropdowns' },
 ]
-const dateInputType = ref<SelectOptions>('default')
+const dateInputType = ref<string>('default')
 
-const dateOutputFormatOptions = [
+const dateOutputFormatOptions: SelectOptions = [
   { label: 'Unformatted', value: 'default' },
   { label: 'ISO 8601', value: 'iso8601' },
   { label: 'Unix Timestamp', value: 'unix' },
 ]
-const dateOutputFormat = ref<SelectOptions>('default')
+const dateOutputFormat = ref<string>('default')
 </script>
