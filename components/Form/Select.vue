@@ -1,5 +1,10 @@
 <script setup lang="ts">
-export type SelectOptions = { label: string; value: string }[]
+export interface SelectOption {
+  label: string
+  value: string
+}
+
+export type SelectOptions = SelectOption[]
 
 const model = defineModel()
 
