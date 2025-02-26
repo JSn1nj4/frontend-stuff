@@ -6,6 +6,7 @@ export interface IFieldIO<T> {
   filters: FunctionCollection
   filter: Ref<Function>
   setFilter: (e: Event) => void
+  setFilterRaw: (filter: string) => void
   setValue: (e: Event) => void
 }
 
@@ -23,17 +24,26 @@ export class FieldIO implements IFieldIO<string> {
     }
     console.log(`Filters: '${Object.keys(this.filters).join("','")}'`)
     this.filter = ref<Function>(this.filters.default)
-    this.output = computed((): string => this.filter.value(this.input.value))
+    this.output = computed(() => {
+      let filter = this.filter.value
+
+      return filter(this.input.value)
+    })
   }
 
   setFilter(e: Event) {
     const filter = (e.target as HTMLInputElement).value
 
+    this.setFilterRaw(filter)
+  }
+
+  setFilterRaw(filter: string) {
     if (!this.filters?.[filter]) {
       console.log(`Filter '${filter}' does not exist in filters list.`)
       return
     }
 
+    console.info('Filter updated')
     this.filter.value = this.filters[filter]
   }
 
