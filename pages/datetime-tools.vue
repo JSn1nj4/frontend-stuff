@@ -26,6 +26,7 @@
           name="date-type-input"
           label="Date Selector Type"
           placeholder="Choose how to select a date/time"
+          class="mb-2"
           :options="dateInputTypeOptions"
           v-model="dateInputType"
         />
@@ -43,6 +44,7 @@
           name="date-type-output"
           label="Output Format Selector"
           placeholder="Choose how to format date/time output"
+          class="mb-2"
           :options="dateOutputFormatOptions"
           v-model="dateOutputFormat"
         />
