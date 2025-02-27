@@ -33,7 +33,6 @@
 </template>
 
 <script setup lang="ts">
-import { ComputedRef, Ref } from '@vue/reactivity'
 import type { FieldMessage } from '~/library/types/forms'
 
 type TextField = 'email' | 'number' | 'password' | 'tel' | 'text' | 'textarea'
