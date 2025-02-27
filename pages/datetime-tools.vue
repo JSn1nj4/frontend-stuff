@@ -64,56 +64,47 @@
 <script setup lang="ts">
 import { globals } from '~/library/stores/globals'
 import { FieldIO, type IFieldIO } from '~/library/forms/FieldIO.class'
-import { pipe } from '~/library/helpers/pipes'
-import { formatISO, fromUnixTime, getUnixTime } from 'date-fns'
+import { formatISO, getUnixTime } from 'date-fns'
 import type { SelectOptions } from '~/components/Form/Select.vue'
 import { formatIso8601Zulu } from '~/library/helpers/dates'
 
 const title = ref('Date/Time Tools')
 globals.pageTitle = title.value
 
+function maybeGetDateFrom(input: number | string | Date): Date {
+  return input instanceof Date ? input : new Date(input)
+}
+
 const dateFormatter: IFieldIO<string> = new FieldIO({
   iso8601(v: string): string {
-    let intstr: string = parseInt(v).toString()
-    let steps = []
+    let parsed = maybeGetDateFrom(v)
 
-    // if it's coming from Unix time, take from integer format first
-    if (intstr.length === v.length) {
-      steps.push(parseInt, fromUnixTime)
+    if (isNaN(parsed.valueOf())) {
+      console.error("Couldn't parse input into usable date.")
+      return ''
     }
 
-    steps.push(formatISO)
-
-    return pipe(v, ...steps)
+    return formatISO(parsed)
   },
   iso8601zulu(v: string): string {
-    let intstr: string = parseInt(v).toString()
-    let steps = []
+    let parsed = maybeGetDateFrom(v)
 
-    // if it's coming from Unix time, take from integer format first
-    if (intstr.length === v.length) {
-      steps.push(parseInt, fromUnixTime)
+    if (isNaN(parsed.valueOf())) {
+      console.error("Couldn't parse input into usable date.")
+      return ''
     }
 
-    steps.push(formatIso8601Zulu)
-
-    return pipe(v, ...steps)
+    return formatIso8601Zulu(parsed)
   },
   unix(v: string): string {
-    // Assumed input is integer, which is already a valid Unix timestamp
-    let int = parseInt(v)
-    if (int.toString().length === v.length) {
-      return int.toString()
+    let parsed = maybeGetDateFrom(v)
+
+    if (isNaN(parsed.valueOf())) {
+      console.error("Couldn't parse input into usable date.")
+      return ''
     }
 
-    // Assumed date string, which can be converted to Unix timestamp
-    let unix: number = getUnixTime(new Date(v))
-    if (!isNaN(unix)) {
-      return unix.toString()
-    }
-
-    console.log(`Cannot parse to Unix timestamp. Result: ${unix}`)
-    return v
+    return getUnixTime(parsed).toString()
   },
 })
 
