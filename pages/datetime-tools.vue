@@ -110,8 +110,8 @@ const dateFormatter: IFieldIO<string> = new FieldIO({
 
 const dateInputTypeOptions: SelectOptions = [
   { label: 'Raw', value: 'default' },
-  { label: 'Date Picker', value: 'datepicker' },
-  { label: 'Dropdowns', value: 'dropdowns' },
+  { label: 'Date Picker (TBA)', value: 'datepicker' },
+  { label: 'Dropdowns (TBA)', value: 'dropdowns' },
 ]
 const dateInputType = ref<string>('default')
 
