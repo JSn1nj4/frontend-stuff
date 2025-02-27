@@ -62,10 +62,10 @@
 <script setup lang="ts">
 import { globals } from '~/library/stores/globals'
 import { FieldIO, type IFieldIO } from '~/library/forms/FieldIO.class'
-import { getUnixTime } from 'date-fns/getUnixTime'
 import { pipe } from '~/library/helpers/pipes'
-import { formatISO, fromUnixTime } from 'date-fns'
+import { formatISO, fromUnixTime, getUnixTime } from 'date-fns'
 import type { SelectOptions } from '~/components/Form/Select.vue'
+import { formatIso8601Zulu } from '~/library/helpers/dates'
 
 const title = ref('Date/Time Tools')
 globals.pageTitle = title.value
@@ -73,11 +73,29 @@ globals.pageTitle = title.value
 const dateFormatter: IFieldIO<string> = new FieldIO({
   iso8601(v: string): string {
     let intstr: string = parseInt(v).toString()
+    let steps = []
+
+    // if it's coming from Unix time, take from integer format first
     if (intstr.length === v.length) {
-      return pipe(v, parseInt, fromUnixTime, formatISO)
+      steps.push(parseInt, fromUnixTime)
     }
 
-    return v
+    steps.push(formatISO)
+
+    return pipe(v, ...steps)
+  },
+  iso8601zulu(v: string): string {
+    let intstr: string = parseInt(v).toString()
+    let steps = []
+
+    // if it's coming from Unix time, take from integer format first
+    if (intstr.length === v.length) {
+      steps.push(parseInt, fromUnixTime)
+    }
+
+    steps.push(formatIso8601Zulu)
+
+    return pipe(v, ...steps)
   },
   unix(v: string): string {
     // Assumed input is integer, which is already a valid Unix timestamp
@@ -106,7 +124,8 @@ const dateInputType = ref<string>('default')
 
 const dateOutputFormatOptions: SelectOptions = [
   { label: 'Unformatted', value: 'default' },
-  { label: 'ISO 8601', value: 'iso8601' },
+  { label: 'ISO 8601 (local offset)', value: 'iso8601' },
+  { label: 'ISO 8601 (Zulu)', value: 'iso8601zulu' },
   { label: 'Unix Timestamp', value: 'unix' },
 ]
 const dateOutputFormat = ref<string>('default')
