@@ -34,6 +34,7 @@
           id="date-formatter-input"
           name="date-formatter-input"
           v-model="dateFormatter.input.value"
+          :message="dateInputMessage"
         >
           Input
         </FormInputGroup>
@@ -67,6 +68,7 @@ import { FieldIO, type IFieldIO } from '~/library/forms/FieldIO.class'
 import { formatISO, getUnixTime } from 'date-fns'
 import type { SelectOptions } from '~/components/Form/Select.vue'
 import { formatIso8601Zulu, toHumanReadable } from '~/library/helpers/dates'
+import type { FieldMessage } from '~/library/types/forms'
 
 const title = ref('Date/Time Tools')
 globals.pageTitle = title.value
@@ -75,15 +77,27 @@ function maybeGetDateFrom(input: number | string | Date): Date {
   return input instanceof Date ? input : new Date(input)
 }
 
+function inputError(message: string): void {
+  dateInputMessage.value = {
+    type: 'error',
+    message,
+  }
+}
+
+function resetInputMessage(): void {
+  dateInputMessage.value = undefined
+}
+
 const dateFormatter: IFieldIO<string> = new FieldIO({
   friendly(v: string): string {
     let parsed = maybeGetDateFrom(v)
 
     if (isNaN(parsed.valueOf())) {
-      console.error("Couldn't parse input into usable date.")
+      inputError("Couldn't parse input into usable date.")
       return ''
     }
 
+    resetInputMessage()
     return toHumanReadable(parsed)
   },
 
@@ -91,10 +105,11 @@ const dateFormatter: IFieldIO<string> = new FieldIO({
     let parsed = maybeGetDateFrom(v)
 
     if (isNaN(parsed.valueOf())) {
-      console.error("Couldn't parse input into usable date.")
+      inputError("Couldn't parse input into usable date.")
       return ''
     }
 
+    resetInputMessage()
     return formatISO(parsed)
   },
 
@@ -102,10 +117,11 @@ const dateFormatter: IFieldIO<string> = new FieldIO({
     let parsed = maybeGetDateFrom(v)
 
     if (isNaN(parsed.valueOf())) {
-      console.error("Couldn't parse input into usable date.")
+      inputError("Couldn't parse input into usable date.")
       return ''
     }
 
+    resetInputMessage()
     return formatIso8601Zulu(parsed)
   },
 
@@ -113,10 +129,11 @@ const dateFormatter: IFieldIO<string> = new FieldIO({
     let parsed = maybeGetDateFrom(v)
 
     if (isNaN(parsed.valueOf())) {
-      console.error("Couldn't parse input into usable date.")
+      inputError("Couldn't parse input into usable date.")
       return ''
     }
 
+    resetInputMessage()
     return getUnixTime(parsed).toString()
   },
 })
@@ -127,6 +144,7 @@ const dateInputTypeOptions: SelectOptions = [
   { label: 'Dropdowns (TBA)', value: 'dropdowns' },
 ]
 const dateInputType = ref<string>('default')
+const dateInputMessage = ref<FieldMessage | undefined>()
 
 const dateOutputFormatOptions: SelectOptions = [
   { label: 'Unformatted', value: 'default' },
