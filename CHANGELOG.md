@@ -8,7 +8,7 @@
 - Add package name
 - Start using shadcn-vue for new UI components
   - add `Select` and `Label` components to start with
-- Add Date/Time Tools page
+- #41: Add Date/Time Tools page (#45)
   - Very basic for now, will improve later
 - Set up Git LFS for image assets
 
