@@ -23,8 +23,8 @@
 </template>
 
 <script setup lang="ts">
-import {globals} from "~/components/_stores/globals";
-import type {Target} from "~/components/_types/html-attributes";
+import {globals} from "~/library/stores/globals";
+import type {Target} from "~/library/types/html-attributes";
 
 interface NavLink {
   name: string

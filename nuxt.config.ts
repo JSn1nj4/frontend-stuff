@@ -2,9 +2,7 @@ type HttpsOptions = {key?: string, cert?: string} | undefined
 
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
-  modules: [
-    '@nuxtjs/tailwindcss',
-  ],
+  modules: ['@nuxtjs/tailwindcss', 'shadcn-nuxt', '@nuxtjs/color-mode'],
 
   vite: {
     server: {
@@ -14,6 +12,15 @@ export default defineNuxtConfig({
         protocol: hmrProtocol(process.env?.VITE_SERVER_HMR_PROTOCOL),
       },
     },
+  },
+
+  colorMode: {
+    classSuffix: '',
+  },
+
+  shadcn: {
+    prefix: '',
+    componentDir: './components/ui',
   },
 
   devServer: {

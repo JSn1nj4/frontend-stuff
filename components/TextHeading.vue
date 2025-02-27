@@ -13,7 +13,7 @@
 
 <script setup lang="ts">
 import {defineProps} from "@vue/runtime-core";
-import {FontWeight, TextSize} from "~/components/_types/typography";
+import {FontWeight, TextSize} from "~/library/types/typography";
 import {ComputedRef} from "@vue/reactivity";
 
 const props = withDefaults(defineProps<{

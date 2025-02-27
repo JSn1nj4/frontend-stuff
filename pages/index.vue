@@ -14,11 +14,11 @@
       <TextLink href="https://github.com/JSn1nj4/frontend-stuff/pulls" target="_blank">pull request</TextLink>.
     </p>
     <div class="block sm:grid sm:grid-cols-3 gap-10 dark:text-white mt-4 pt-4 border-t-2 border-t-emerald-500 border-dashed">
-      <div class="mt-0.5 mb-4 sm:mb-0 col-span-3">
+      <div v-for="project in projects" class="mt-0.5 mb-4 sm:mb-0">
         <TextHeading type="h3">
-          <TextLink href="/text-tools">Text Tools</TextLink>
+          <TextLink :href="project.href">{{ project.name }}</TextLink>
         </TextHeading>
-        <p class="text">Simple text-formatting tools to help transform content</p>
+        <p class="text">{{ project.description }}</p>
       </div>
     </div>
   </div>
@@ -26,9 +26,20 @@
 
 <script lang="ts" setup>
 import {ref} from "#imports";
-import {globals} from "~/components/_stores/globals";
+import {globals} from "~/library/stores/globals";
 
 const title = ref('Home')
 
 globals.pageTitle = null
+
+interface Project {
+  name: string
+  href: string
+  description: string
+}
+
+const projects: Project[] = [
+  { name: 'Text Tools', href: '/text-tools', description: 'Simple text-formatting tools to help transform content', },
+  { name: 'Date/Time Tools', href: '/datetime-tools', description: 'Tools for working with date/time strings and timestamps', },
+]
 </script>

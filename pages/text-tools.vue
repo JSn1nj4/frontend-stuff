@@ -7,53 +7,54 @@
     <TextHeading type="h2" class="text-slate-900 dark:text-slate-50 mb-3 font-normal">
       Simple text-formatting tools to help transform content
     </TextHeading>
-     <div class="block sm:grid sm:grid-cols-3 gap-10 text-slate-800 dark:text-white mt-4 pt-4 border-t-2 border-t-emerald-500 border-dashed">
+    <div class="block sm:grid sm:grid-cols-3 gap-10 text-slate-800 dark:text-white mt-4 pt-4 border-t-2 border-t-emerald-500 border-dashed">
       <div class="mt-0.5 mb-4 sm:mb-0">
-        <FormRadioGroup :list="radioList" name="transform" text-size="text-lg" :click-handler="setFilter" />
+        <FormRadioGroup :list="radioList" name="transform" text-size="text-lg" @change="textFormatters.setFilter($event)" />
       </div>
       <div class="col-span-2">
-        <TextHeading type="h4">Input</TextHeading>
-        <textarea type="text" class="w-full transition-colors border-2 border-solid border-slate-300 dark:border-slate-500 hover:border-slate-800 dark:hover:border-slate-400 rounded mb-4 p-2 bg-slate-100 dark:bg-slate-600" @keyup="setInput" />
-        <TextHeading type="h4">Output</TextHeading>
-        <div class="w-full border-2 border-solid border-slate-200 dark:border-slate-600 rounded h-36 p-2 bg-slate-100 dark:bg-slate-700 text-slate-500 dark:text-slate-400">{{ output }}</div>
+        <FormInputGroup
+          id="text-formatter-input"
+          @keyup="textFormatters.setValue($event)"
+          name="text-formatter-input"
+          type="textarea"
+        >
+          Input
+        </FormInputGroup>
+        <FormInputGroup
+          disabled
+          id="text-formatter-output"
+          name="text-formatter-output"
+          type="textarea"
+          :value="textFormatters.output"
+        >
+          Output
+        </FormInputGroup>
       </div>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
-import {globals} from "~/components/_stores/globals";
+import {globals} from "~/library/stores/globals"
+import type {IFieldIO} from "~/library/forms/FieldIO.class"
+import {FieldIO} from "~/library/forms/FieldIO.class"
+import {capitalize, lowercase, titlecase, uppercase, urldecode, urlencode} from "~/library/helpers/formatters/string";
 
 const title = ref('Text Tools')
 
 globals.pageTitle = title.value
 
-const mutators = {
-  capitalize: (v: string): string => {
-    return v.charAt(0).toUpperCase() + v.substring(1).toLowerCase()
-  },
-  uppercase: (v: string): string => v.toUpperCase(),
-  lowercase: (v: string): string => v.toLowerCase(),
-  titlecase: (v: string): string => {
-    return v.split(' ').map(mutators.capitalize).join(' ')
-  },
-  urlencode: (v: string): string => encodeURIComponent(v),
-  urldecode: (v: string): string => decodeURIComponent(v),
-}
-
-const input = ref('')
-const filter = ref<Function>((v: string): string => v)
-const output = computed((): string => filter.value(input.value))
-
-function setInput(e: Event): void {
-  input.value = (e.target as HTMLInputElement).value
-}
-
-function setFilter(e: Event): void {
-  filter.value = mutators[(e.target as HTMLInputElement).value]
-}
+const textFormatters: IFieldIO<string> = new FieldIO({
+  capitalize,
+  uppercase,
+  lowercase,
+  titlecase,
+  urlencode,
+  urldecode
+})
 
 const radioList = [
+  { label: 'Input', id: 'default', value: 'default', checked: true },
   { label: 'Capitalize', id: 'capitalize', value: 'capitalize', },
   { label: 'UPPERCASE', id: 'uppercase', value: 'uppercase', },
   { label: 'lowercase', id: 'lowercase', value: 'lowercase', },
