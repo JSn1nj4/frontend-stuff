@@ -6,6 +6,11 @@
 - Replaced yarn with pnpm@9.12.2
 - Upgrade all project dependencies
 - Add package name
+- Start using shadcn-vue for new UI components
+  - add `Select` and `Label` components to start with
+- Add Date/Time Tools page
+  - Very basic for now, will improve later
+- Set up Git LFS for image assets
 
 ## 1.0.2
 
@@ -38,6 +43,7 @@
 - SPA 404 fallback setting for Netlify
 
 ## 0.1.0
+
 Initial release
 
 - Mostly default Nuxt build
