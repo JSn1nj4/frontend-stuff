@@ -66,7 +66,7 @@ import { globals } from '~/library/stores/globals'
 import { FieldIO, type IFieldIO } from '~/library/forms/FieldIO.class'
 import { formatISO, getUnixTime } from 'date-fns'
 import type { SelectOptions } from '~/components/Form/Select.vue'
-import { formatIso8601Zulu } from '~/library/helpers/dates'
+import { formatIso8601Zulu, toHumanReadable } from '~/library/helpers/dates'
 
 const title = ref('Date/Time Tools')
 globals.pageTitle = title.value
@@ -76,6 +76,17 @@ function maybeGetDateFrom(input: number | string | Date): Date {
 }
 
 const dateFormatter: IFieldIO<string> = new FieldIO({
+  friendly(v: string): string {
+    let parsed = maybeGetDateFrom(v)
+
+    if (isNaN(parsed.valueOf())) {
+      console.error("Couldn't parse input into usable date.")
+      return ''
+    }
+
+    return toHumanReadable(parsed)
+  },
+
   iso8601(v: string): string {
     let parsed = maybeGetDateFrom(v)
 
@@ -86,6 +97,7 @@ const dateFormatter: IFieldIO<string> = new FieldIO({
 
     return formatISO(parsed)
   },
+
   iso8601zulu(v: string): string {
     let parsed = maybeGetDateFrom(v)
 
@@ -96,6 +108,7 @@ const dateFormatter: IFieldIO<string> = new FieldIO({
 
     return formatIso8601Zulu(parsed)
   },
+
   unix(v: string): string {
     let parsed = maybeGetDateFrom(v)
 
@@ -117,6 +130,7 @@ const dateInputType = ref<string>('default')
 
 const dateOutputFormatOptions: SelectOptions = [
   { label: 'Unformatted', value: 'default' },
+  { label: 'Human Readable', value: 'friendly' },
   { label: 'ISO 8601 (local offset)', value: 'iso8601' },
   { label: 'ISO 8601 (Zulu)', value: 'iso8601zulu' },
   { label: 'Unix Timestamp', value: 'unix' },
