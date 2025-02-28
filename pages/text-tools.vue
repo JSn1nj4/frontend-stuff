@@ -25,7 +25,7 @@
           id="text-formatter-output"
           name="text-formatter-output"
           type="textarea"
-          :value="textFormatters.output"
+          v-model="textFormatters.output.value"
         >
           Output
         </FormInputGroup>
