@@ -6,12 +6,13 @@
       :class="{
         [textSize]: !!textSize,
         [spacing]: !!spacing,
-        'last:mb-0': list.length > 1 && index === list.length - 1
+        'last:mb-0': list.length > 1 && index === list.length - 1,
       }"
       :id="radio.id"
       :name="name"
       :value="radio.value"
-      :click-handler="clickHandler"
+      :checked="radio.value === model"
+      @change="changed"
     >
       {{ radio.label }}
     </FormRadioButton>
@@ -19,23 +20,33 @@
 </template>
 
 <script setup lang="ts">
-import {BorderBottom} from "~/components/_types/spacing";
-import {TextSize} from "~/components/_types/typography";
+import { type BorderBottom } from '~/library/types/spacing'
+import { type TextSize } from '~/library/types/typography'
+
+const model = defineModel()
+const emit = defineEmits(['update:modelValue'])
+
+function changed(e: Event): void {
+  emit('update:modelValue', (e.target as HTMLInputElement).value)
+}
 
 interface RadioList {
+  checked?: boolean
   label: string
   id: string
   value: string
 }
 
-const props = withDefaults(defineProps<{
-  clickHandler?: Function,
-  list: RadioList[],
-  name: string,
-  spacing?: BorderBottom,
-  textSize?: TextSize,
-}>(), {
-  spacing: 'mb-1',
-  textSize: "text-md"
-})
+const props = withDefaults(
+  defineProps<{
+    list: RadioList[]
+    name: string
+    spacing?: BorderBottom
+    textSize?: TextSize
+  }>(),
+  {
+    spacing: 'mb-1',
+    textSize: 'text-md',
+  }
+)
 </script>

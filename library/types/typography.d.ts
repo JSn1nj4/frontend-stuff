@@ -1,3 +1,9 @@
+export type FontWeight =
+  | "font-light"
+  | "font-normal"
+  | "font-semibold"
+  | "font-bold"
+
 export type TextSize =
   | 'text-xs'
   | 'text-sm'

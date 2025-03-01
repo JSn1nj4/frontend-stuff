@@ -1,22 +1,9 @@
 <template>
-  <a
-    class="flex justify-center pt-8 sm:pt-0 text-emerald-700 dark:text-emerald-500"
-    :href="href"
+  <div
+    class="flex justify-center mb-8 border-dashed border-t-2 border-t-slate-300/70 dark:border-t-slate-300/20 pt-8 text-slate-800 dark:text-white"
   >
-    <TextHeading>
-      {{ title }}
+    <TextHeading weight="font-light">
+      <slot />
     </TextHeading>
-  </a>
+  </div>
 </template>
-
-<script setup lang="ts">
-import {defineProps} from "@vue/runtime-core";
-
-const props = withDefaults(defineProps<{
-  href?: string,
-  title?: string,
-}>(), {
-  href: '/',
-  title: 'Frontend Stuff',
-})
-</script>

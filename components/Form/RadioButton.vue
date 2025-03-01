@@ -1,6 +1,6 @@
 <template>
   <div>
-    <input :id="id" type="radio" :name="name" :value="value" class="mr-2" @change="clickHandler">
+    <input :id="id" type="radio" :name="name" :value="value" class="mr-2" :checked="checked">
     <label :for="id">
       <slot />
     </label>
@@ -9,9 +9,9 @@
 
 <script setup lang="ts">
 const props = defineProps<{
-  clickHandler?: Function,
   id: string,
   name: string,
   value: string,
+  checked?: boolean,
 }>()
 </script>
