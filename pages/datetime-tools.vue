@@ -156,7 +156,6 @@ const dateOutputFormatOptions: SelectOptions = [
 const dateOutputFormat = ref<string>('default')
 
 watch(dateOutputFormat, (format: string) => {
-  console.info('new format:', format)
   dateFormatter.setFilterRaw(format)
 })
 </script>

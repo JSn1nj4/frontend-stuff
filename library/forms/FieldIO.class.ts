@@ -22,7 +22,7 @@ export class FieldIO implements IFieldIO<string> {
       default: (v: string) => v,
       ...filters,
     }
-    console.log(`Filters: '${Object.keys(this.filters).join("','")}'`)
+
     this.filter = ref<Function>(this.filters.default)
     this.output = computed(() => {
       let filter = this.filter.value
@@ -39,11 +39,9 @@ export class FieldIO implements IFieldIO<string> {
 
   setFilterRaw(filter: string) {
     if (!this.filters?.[filter]) {
-      console.log(`Filter '${filter}' does not exist in filters list.`)
       return
     }
 
-    console.info('Filter updated')
     this.filter.value = this.filters[filter]
   }
 

@@ -83,7 +83,6 @@ const radioList = [
 ]
 const textOutputFormat = ref<string>('default')
 watch(textOutputFormat, (format) => {
-  console.info(`new format: ${format}`)
   textFormatters.setFilterRaw(format)
 })
 </script>

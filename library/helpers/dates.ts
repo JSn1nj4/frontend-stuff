@@ -10,8 +10,6 @@ export function toUTCDate(date: Date | string): Date {
     date = new Date(date)
   }
 
-  console.info(typeof date)
-
   return addMinutes(date, date.getTimezoneOffset())
 }
 

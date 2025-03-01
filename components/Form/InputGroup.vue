@@ -61,8 +61,6 @@ const props = withDefaults(
 const emit = defineEmits(['update:modelValue'])
 
 function changed(e: Event) {
-  console.log(`Changed: ${e.currentTarget}`)
-
   emit('update:modelValue', (e.currentTarget as HTMLInputElement).value)
 }
 
