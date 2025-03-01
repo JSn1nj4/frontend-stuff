@@ -2,14 +2,26 @@
 
 ## 1.1.0
 
-- Node version updated to 22.10.0
-- Replaced yarn with pnpm@9.12.2
-- Upgrade all project dependencies
-- Add package name
+### New
+
 - Start using shadcn-vue for new UI components
   - add `Select` and `Label` components to start with
 - #41: Add Date/Time Tools page (#45)
   - Very basic for now, will improve later
+
+### Changes
+
+- Upgrade all project dependencies
+- Add package name
+
+### Fixes
+
+- #44: Fix Text Tools (#50)
+
+### Development
+
+- Node version updated to 22.10.0
+- Replaced yarn with pnpm@9.12.2
 - Set up Git LFS for image assets
 
 ## 1.0.2
