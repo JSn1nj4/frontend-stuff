@@ -16,6 +16,8 @@
 
 ### Fixes
 
+- #44: Fix Text Tools (#50)
+
 ### Development
 
 - Node version updated to 22.10.0
