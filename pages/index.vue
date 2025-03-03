@@ -30,7 +30,7 @@ import {globals} from "~/library/stores/globals";
 
 const title = ref('Home')
 
-globals.pageTitle = null
+globals.pageTitle = undefined
 
 interface Project {
   name: string
